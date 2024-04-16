@@ -6,7 +6,7 @@ import pandas as pd
 import tkinter
 from tkinter import ttk
 from StaticGUIConfigs import *
-from Components import CutPaste
+import CutPaste
 
 
 def getChromeDownloads(parent_window):  # Accept the parent window as an argument
