@@ -1,0 +1,6 @@
+psutil~=5.9.8
+tinytag~=1.10.1
+ExifRead~=3.0.0
+pillow~=10.3.0
+hachoir~=3.3.0
+pandas~=2.2.2
