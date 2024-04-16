@@ -1,19 +1,17 @@
 import tkinter
 from tkinter import ttk, PhotoImage
-
-# Update imports with correct module names
-from StaticGUIConfigs import *
-from GetChromeHistory import getChromeHistory
-from GetChromeCookies import getChromeCookies
-from GetChromeDownloads import getChromeDownloads
-from ImageForensics import create_image_metadata_viewer
-from VideoForensics import create_video_metadata_viewer
-from AudioForensics import run_audio_metadata_viewer
-from ProcessList import run_pslist_tool
-from LoadedDLLs import run_list_loaded_dlls_tool
-from ARPtable import analyzeARPtable
-from MalwarePersistance import malware_persistence_tool
-from USBhistory import usb_history_analyzer_tool
+from Components.StaticGUIConfigs import *
+from Components.GetChromeHistory import getChromeHistory
+from Components.GetChromeCookies import getChromeCookies
+from Components.GetChromeDownloads import getChromeDownloads
+from Components.ImageForensics import create_image_metadata_viewer
+from Components.VideoForensics import create_video_metadata_viewer
+from Components.AudioForensics import run_audio_metadata_viewer
+from Components.ProcessList import run_pslist_tool
+from Components.LoadedDLLs import run_list_loaded_dlls_tool
+from Components.ARPtable import analyzeARPtable
+from Components.MalwarePersistance import malware_persistence_tool
+from Components.USBhistory import usb_history_analyzer_tool
 
 # Main Window
 mainWindow = tkinter.Tk()
