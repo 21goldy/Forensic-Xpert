@@ -54,7 +54,8 @@ Forensic-Xpert offers the following features:
 ## Installation
 
 To run Forensic-Xpert, ensure you have Python installed on your system. You can install the required dependencies using pip:
-pip install -r requirements.txt
+
+### pip install -r requirements.txt
 
 ## Usage
 Run the main.py file to start the Forensic-Xpert application. Once launched, you can navigate through the tabs to access different forensic tools. Click on the respective buttons to perform forensic analysis on the selected data.
