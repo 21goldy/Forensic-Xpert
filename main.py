@@ -15,7 +15,7 @@ from VideoForensics import create_video_metadata_viewer
 
 # Main Window
 mainWindow = tkinter.Tk()
-mainWindow.title("ForensicXpert: Elite Computer Forensics Suite")
+mainWindow.title("Forensic-Xpert: Elite Computer Forensics Suite")
 mainWindow.resizable(False, False)
 mainWindow['background'] = '#333333'  # Dark grey background
 positionWindow(mainWindow, width=1000, height=730)
@@ -23,7 +23,7 @@ positionWindow(mainWindow, width=1000, height=730)
 # Title
 titleText = tkinter.Label(
     mainWindow,
-    text="ForensicXpert: Computer Forensics Suite",
+    text="Forensic-Xpert: Computer Forensics Suite",
     bg="#333333",  # Dark grey background
     fg="#ffffff",  # White text
     pady=20,
