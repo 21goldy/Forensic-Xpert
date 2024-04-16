@@ -43,6 +43,14 @@ Forensic-Xpert offers the following features:
 - Check Malware Persistence
 - Get USB History
 
+## Snapshots 
+
+![Screenshot (1176)](https://github.com/21goldy/Forensic-Xpert/assets/64465355/ccdd3efe-f00c-45b6-9e7c-0182a0f14ca4)
+![Screenshot (1172)](https://github.com/21goldy/Forensic-Xpert/assets/64465355/9bab23ed-1596-4cd1-95a6-1494700fed95)
+![Screenshot (1173)](https://github.com/21goldy/Forensic-Xpert/assets/64465355/18725251-35c9-47df-911d-0c0ac3932c8d)
+![Screenshot (1174)](https://github.com/21goldy/Forensic-Xpert/assets/64465355/24719281-8acb-420f-998d-87ebe41e2ecd)
+![Screenshot (1175)](https://github.com/21goldy/Forensic-Xpert/assets/64465355/4af3e5f3-771d-4812-b0c9-8b70487ed822)
+
 ## Installation
 
 To run Forensic-Xpert, ensure you have Python installed on your system. You can install the required dependencies using pip:
