@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import ttk, filedialog
 import winreg
-from Components.StaticGUIConfigs import *
+
+from StaticGUIConfigs import bgColor
+
 
 def usb_history_analyzer_tool(parent_window):
     def analyze_usb_history():

@@ -2,7 +2,7 @@ from hachoir.parser import createParser
 from hachoir.metadata import extractMetadata
 import tkinter as tk
 from tkinter import filedialog, messagebox
-from Components.StaticGUIConfigs import *
+from StaticGUIConfigs import *
 
 def create_video_metadata_viewer(parent_window):
     root = tk.Toplevel(parent_window)
