@@ -1,19 +1,17 @@
 import tkinter
 from tkinter import ttk, PhotoImage
-
-# Update imports with correct module names
-from Components.StaticGUIConfigs import *
-from Components.GetChromeHistory import getChromeHistory
+from ARPtable import analyzeARPtable
+from AudioForensics import run_audio_metadata_viewer
 from GetChromeCookies import getChromeCookies
 from GetChromeDownloads import getChromeDownloads
-from Components.ImageForensics import create_image_metadata_viewer
-from VideoForensics import create_video_metadata_viewer
-from AudioForensics import run_audio_metadata_viewer
-from Components.ProcessList import run_pslist_tool
-from Components.LoadedDLLs import run_list_loaded_dlls_tool
-from ARPtable import analyzeARPtable
-from Components.MalwarePersistance import malware_persistence_tool
+from GetChromeHistory import getChromeHistory
+from ImageForensics import create_image_metadata_viewer
+from LoadedDLLs import run_list_loaded_dlls_tool
+from MalwarePersistance import malware_persistence_tool
+from ProcessList import run_pslist_tool
+from StaticGUIConfigs import positionWindow
 from USBhistory import usb_history_analyzer_tool
+from VideoForensics import create_video_metadata_viewer
 
 # Main Window
 mainWindow = tkinter.Tk()
@@ -60,26 +58,81 @@ homeText = tkinter.Label(
     fg="#ffffff",  # White text
     pady=10,
     font=("Roboto", 20))  # Roboto font
-homeText.place(relx=0.5, rely=0.1, anchor=tkinter.CENTER)
+homeText.pack(side="top")
 
 # Define features for the Home Tab
 home_features = [
-    "Get Browser History", "Get Browser Cookies", "Get Browser Downloads",
-    "Image Forensics", "Video Forensics", "Audio Forensics",
-    "Get Process List", "List Loaded DLLs", "Analyze ARP Table",
-    "Check Malware Persistence", "Get USB History"
+    ("Get Browser History", "images/history.png", getChromeHistory),
+    ("Get Browser Cookies", "images/cookies.png", getChromeCookies),
+    ("Get Browser Downloads", "images/downloads.png", getChromeDownloads),
+    ("Image Forensics", "images/image.png", create_image_metadata_viewer),
+    ("Video Forensics", "images/video.png", create_video_metadata_viewer),
+    ("Audio Forensics", "images/audio.png", run_audio_metadata_viewer),
+    ("Get Process List", "images/list.png", run_pslist_tool),
+    ("List Loaded DLLs", "images/dll.png", run_list_loaded_dlls_tool),
+    ("Analyze ARP Table", "images/arp.png", analyzeARPtable),
+    ("Check Malware Persistence", "images/malware.png", malware_persistence_tool),
+    ("Get USB History", "images/usb.png", usb_history_analyzer_tool)
 ]
 
+# Create a canvas to hold the buttons and scrollbar
+canvas = tkinter.Canvas(tabs[0], bg="#333333", highlightthickness=0)
+canvas.pack(side="left", fill="both", expand=True)
+
+# Create a frame inside the canvas to contain the buttons
+frame = tkinter.Frame(canvas, bg="#333333")
+canvas.create_window((0, 0), window=frame, anchor="nw")
+
+# Create a vertical scrollbar for the canvas
+scrollbar = ttk.Scrollbar(tabs[0], orient="vertical", command=canvas.yview)
+scrollbar.pack(side="right", fill="y")
+canvas.configure(yscrollcommand=scrollbar.set)
+
 # Display features on the Home Tab
-for i, feature in enumerate(home_features):
-    featureLabel = tkinter.Label(
-        tabs[0],  # Home Tab
-        text=f"{i + 1}. {feature}",
-        bg="#333333",  # Dark grey background
+buttons = []
+button_images = []  # to keep references to PhotoImage objects
+for i, (feature, image_path, callback) in enumerate(home_features):
+    # Load image
+    image_icon = PhotoImage(file=image_path).subsample(5, 5)
+    button_images.append(image_icon)
+    # Create button
+    button = tkinter.Button(
+        frame,  # Home Tab frame
+        text=feature,
+        image=image_icon,
+        compound=tkinter.TOP,  # Place the image on top of the text
+        bg="#666666",  # Dark grey background
         fg="#ffffff",  # White text
-        pady=5,
-        font=("Roboto", 12))  # Roboto font
-    featureLabel.place(relx=0.5, rely=0.25 + i * 0.05, anchor=tkinter.CENTER)
+        pady=10,
+        padx=50,
+        font=("Roboto", 12),  # Roboto font
+        command=lambda cb=callback: cb(mainWindow)  # Pass callback function
+    )
+    buttons.append(button)
+    # Position button
+    button.grid(row=i // 3, column=i % 3, padx=20, pady=20)
+
+# Update scroll region when the frame size changes
+frame.update_idletasks()
+canvas.config(scrollregion=canvas.bbox("all"))
+
+
+# Function to update the canvas scrolling region
+def update_scroll_region(event):
+    canvas.configure(scrollregion=canvas.bbox("all"))
+
+
+# Bind the frame's update function to canvas size change
+frame.bind("<Configure>", update_scroll_region)
+
+
+# Function to handle mouse wheel scrolling
+def on_mousewheel(event):
+    canvas.yview_scroll(-1 * int((event.delta / 120)), "units")
+
+
+# Bind the canvas to the mouse wheel event
+canvas.bind("<MouseWheel>", on_mousewheel)
 
 
 # -------------------------------- Browser Forensics Tab -------------------------------- #
