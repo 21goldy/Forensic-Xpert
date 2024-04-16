@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import scrolledtext, filedialog, messagebox
 import subprocess
-from StaticGUIConfigs import * 
+from StaticGUIConfigs import *
+
 
 def run_arp_command():
     try:
@@ -9,6 +10,7 @@ def run_arp_command():
         return result.stdout.replace('\r\n', ' ')  # Replace newline characters with spaces
     except Exception as e:
         return f"Error running 'arp -a' command: {e}"
+
 
 def export_to_file(content):
     file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt")])
@@ -20,13 +22,14 @@ def export_to_file(content):
         except Exception as e:
             messagebox.showerror("Export Error", f"Error exporting to file: {e}")
 
+
 def analyzeARPtable(parent_window):
     result = run_arp_command()
 
     root = tk.Toplevel(parent_window)
     root.title("Analyze ARP Table")
-    root.resizable(False, False) # Disallow resizing of the mainWindow
-    root['background']=bgColor # Set backgound color
+    root.resizable(False, False)  # Disallow resizing of the mainWindow
+    root['background'] = bgColor  # Set backgound color
 
     # Create a scrolled text widget with a fixed font
     output_text = scrolledtext.ScrolledText(

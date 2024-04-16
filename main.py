@@ -15,11 +15,11 @@ from USBhistory import usb_history_analyzer_tool
 
 # Main Window
 
-mainWindow = tkinter.Tk() # Initialize mainWindow object
-mainWindow.title("ForensicXpert: Elite Computer Forensics Suite") # Give a title to the mainWindow
-mainWindow.resizable(False, False) # Disallow resizing of the mainWindow
-mainWindow['background']=bgColor # Set backgound color
-positionWindow(mainWindow, width=1000, height=730) # Stick the window at the top edge of screen
+mainWindow = tkinter.Tk()  # Initialize mainWindow object
+mainWindow.title("ForensicXpert: Elite Computer Forensics Suite")  # Give a title to the mainWindow
+mainWindow.resizable(False, False)  # Disallow resizing of the mainWindow
+mainWindow['background'] = bgColor  # Set backgound color
+positionWindow(mainWindow, width=1000, height=730)  # Stick the window at the top edge of screen
 
 titleText = tkinter.Label(
     mainWindow,
@@ -30,14 +30,14 @@ titleText = tkinter.Label(
     font=("Arial Rounded MT Bold", 17))
 titleText.pack(side="top", fill="x")
 
-
 # TAB MENUs
 tabStyle = ttk.Style()
 tabStyle.theme_create("CustomStyle", parent="alt", settings={
     "TFrame": {"configure": {"background": bgColor}},
-    "TNotebook": {"configure": {"background": "#d5e6f6", "tabmargins": [70, 30, 0, 30]}}, # Tab Background
-    "TNotebook.Tab": {"configure": {"background": "#ffffff", "padding": [20, 20], "font": ("Consolas", 12, "bold"), "borderwidth": 2}}, # Tab menu config
-    })
+    "TNotebook": {"configure": {"background": "#d5e6f6", "tabmargins": [70, 30, 0, 30]}},  # Tab Background
+    "TNotebook.Tab": {"configure": {"background": "#ffffff", "padding": [20, 20], "font": ("Consolas", 12, "bold"),
+                                    "borderwidth": 2}},  # Tab menu config
+})
 tabStyle.theme_use("CustomStyle")
 
 notebook = ttk.Notebook(mainWindow, style="TNotebook")
@@ -53,8 +53,6 @@ registryForensicsTab = ttk.Frame(notebook)
 notebook.add(registryForensicsTab, text="Registry Forensics")
 notebook.pack(expand=True, fill="both")
 
-
-
 # Home Tab
 homeText = tkinter.Label(
     homeTab,
@@ -62,7 +60,7 @@ homeText = tkinter.Label(
     bg=bgColor,
     pady=10,
     font=("Arial Rounded MT Bold", 20))
-homeText.place(x=leftMargin+85, y=0)
+homeText.place(x=leftMargin + 85, y=0)
 
 featureText = tkinter.Label(
     homeTab,
@@ -70,7 +68,7 @@ featureText = tkinter.Label(
     bg=bgColor,
     pady=10,
     font=("Arial Rounded MT Bold", 20))
-featureText.place(x=leftMargin+85, y=50)
+featureText.place(x=leftMargin + 85, y=50)
 
 featureListText = tkinter.Label(
     homeTab,
@@ -83,7 +81,7 @@ featureListText = tkinter.Label(
     bg=bgColor,
     pady=10,
     font=("Consolas", 12))
-featureListText.place(x=leftMargin+95, y=90)
+featureListText.place(x=leftMargin + 95, y=90)
 
 featureListText2 = tkinter.Label(
     homeTab,
@@ -96,7 +94,7 @@ featureListText2 = tkinter.Label(
     bg=bgColor,
     pady=10,
     font=("Consolas", 12))
-featureListText2.place(x=leftMargin+500, y=90)
+featureListText2.place(x=leftMargin + 500, y=90)
 
 featureListText3 = tkinter.Label(
     homeTab,
@@ -109,7 +107,7 @@ featureListText3 = tkinter.Label(
     bg=bgColor,
     pady=10,
     font=("Consolas", 12))
-featureListText3.place(x=leftMargin+110, y=225)
+featureListText3.place(x=leftMargin + 110, y=225)
 
 featureListText4 = tkinter.Label(
     homeTab,
@@ -121,8 +119,7 @@ featureListText4 = tkinter.Label(
     bg=bgColor,
     pady=10,
     font=("Consolas", 12))
-featureListText4.place(x=leftMargin+500, y=225)
-
+featureListText4.place(x=leftMargin + 500, y=225)
 
 # Browser Forensics Tab
 WebForensicsText = tkinter.Label(
@@ -133,8 +130,11 @@ WebForensicsText = tkinter.Label(
     font=("Consolas", 14, "italic"))
 WebForensicsText.place(x=leftMargin, y=0)
 
+
 def on_get_history_button_click():
     getChromeHistory(mainWindow)
+
+
 getHistoryButton = tkinter.Button(
     browserTab,
     command=on_get_history_button_click,
@@ -145,8 +145,11 @@ getHistoryButton = tkinter.Button(
     font=browserToolsFont)
 getHistoryButton.place(x=leftMargin, y=100)
 
+
 def on_get_cookies_button_click():
     getChromeCookies(mainWindow)
+
+
 getCookiesButton = tkinter.Button(
     browserTab,
     command=on_get_cookies_button_click,
@@ -155,10 +158,13 @@ getCookiesButton = tkinter.Button(
     pady=70,
     padx=browserToolsPadX,
     font=browserToolsFont)
-getCookiesButton.place(x=leftMargin+370, y=100)
+getCookiesButton.place(x=leftMargin + 370, y=100)
+
 
 def on_get_downloads_button_click():
     getChromeDownloads(mainWindow)
+
+
 getDownloadsButton = tkinter.Button(
     browserTab,
     command=on_get_downloads_button_click,
@@ -167,8 +173,7 @@ getDownloadsButton = tkinter.Button(
     pady=70,
     padx=browserToolsPadX,
     font=browserToolsFont)
-getDownloadsButton.place(x=leftMargin+740, y=100)
-
+getDownloadsButton.place(x=leftMargin + 740, y=100)
 
 # Media Forensics Tab
 
@@ -180,9 +185,12 @@ mediaForensicsText = tkinter.Label(
     font=("Consolas", 14, "italic"))
 mediaForensicsText.place(x=leftMargin, y=0)
 
+
 # Image file forensics
 def on_get_image_metadata_button_click():
     create_image_metadata_viewer(mainWindow)
+
+
 imageForensicsButton = tkinter.Button(
     mediaForensicsTab,
     command=on_get_image_metadata_button_click,
@@ -193,9 +201,12 @@ imageForensicsButton = tkinter.Button(
     font=browserToolsFont)
 imageForensicsButton.place(x=leftMargin, y=100)
 
+
 # Video file forensics
 def on_get_video_metadata_button_click():
     create_video_metadata_viewer(mainWindow)
+
+
 videoForensicsButton = tkinter.Button(
     mediaForensicsTab,
     command=on_get_video_metadata_button_click,
@@ -204,11 +215,14 @@ videoForensicsButton = tkinter.Button(
     pady=70,
     padx=browserToolsPadX,
     font=browserToolsFont)
-videoForensicsButton.place(x=leftMargin+380, y=100)
+videoForensicsButton.place(x=leftMargin + 380, y=100)
+
 
 # Audio file forensics
 def on_get_audio_metadata_button_click():
     run_audio_metadata_viewer(mainWindow)
+
+
 audioForensicsButton = tkinter.Button(
     mediaForensicsTab,
     command=on_get_audio_metadata_button_click,
@@ -217,8 +231,7 @@ audioForensicsButton = tkinter.Button(
     pady=70,
     padx=browserToolsPadX,
     font=browserToolsFont)
-audioForensicsButton.place(x=leftMargin+750, y=100)
-
+audioForensicsButton.place(x=leftMargin + 750, y=100)
 
 # Memory Forensics Tab
 
@@ -230,9 +243,12 @@ MemoryForensicsText = tkinter.Label(
     font=("Consolas", 14, "italic"))
 MemoryForensicsText.place(x=leftMargin, y=0)
 
+
 # List Process List
 def on_get_pslist_button_click():
     run_pslist_tool(mainWindow)
+
+
 getPSlistButton = tkinter.Button(
     memoryForensicsTab,
     command=on_get_pslist_button_click,
@@ -243,22 +259,28 @@ getPSlistButton = tkinter.Button(
     font=browserToolsFont)
 getPSlistButton.place(x=leftMargin, y=100)
 
+
 # List Loaded DLLs
 def on_get_loaded_dlls_button_click():
     run_list_loaded_dlls_tool(mainWindow)
+
+
 listLoadedDLLsButton = tkinter.Button(
     memoryForensicsTab,
     command=on_get_loaded_dlls_button_click,
     text="List Loaded DLLs",
     bg=browserToolsBG,
     pady=70,
-    padx=browserToolsPadX+10,
+    padx=browserToolsPadX + 10,
     font=browserToolsFont)
-listLoadedDLLsButton.place(x=leftMargin+380, y=100)
+listLoadedDLLsButton.place(x=leftMargin + 380, y=100)
+
 
 # Analyze ARP Table
 def on_analyze_arp_table_button_click():
     analyzeARPtable(mainWindow)
+
+
 analyzeARPtableButton = tkinter.Button(
     memoryForensicsTab,
     command=on_analyze_arp_table_button_click,
@@ -267,8 +289,7 @@ analyzeARPtableButton = tkinter.Button(
     pady=70,
     padx=browserToolsPadX,
     font=browserToolsFont)
-analyzeARPtableButton.place(x=leftMargin+750, y=100)
-
+analyzeARPtableButton.place(x=leftMargin + 750, y=100)
 
 # Registry Forensics Tab
 
@@ -280,9 +301,12 @@ RegistryForensicsText = tkinter.Label(
     font=("Consolas", 14, "italic"))
 RegistryForensicsText.place(x=leftMargin, y=0)
 
+
 # Malware Persistance
 def on_get_malware_presistance_button_click():
     malware_persistence_tool(mainWindow)
+
+
 checkMalwarePersistanceButton = tkinter.Button(
     registryForensicsTab,
     command=on_get_malware_presistance_button_click,
@@ -293,17 +317,20 @@ checkMalwarePersistanceButton = tkinter.Button(
     font=browserToolsFont)
 checkMalwarePersistanceButton.place(x=leftMargin, y=100)
 
+
 # Get USB History
 def on_get_usb_history_button_click():
     usb_history_analyzer_tool(mainWindow)
+
+
 getUSBhistoryButton = tkinter.Button(
     registryForensicsTab,
     command=on_get_usb_history_button_click,
     text="USB History",
     bg=browserToolsBG,
     pady=70,
-    padx=browserToolsPadX+10,
+    padx=browserToolsPadX + 10,
     font=browserToolsFont)
-getUSBhistoryButton.place(x=leftMargin+380, y=100)
+getUSBhistoryButton.place(x=leftMargin + 380, y=100)
 
 mainWindow.mainloop()
