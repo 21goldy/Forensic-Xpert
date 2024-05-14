@@ -1,3 +1,5 @@
+import os
+import sys
 import tkinter
 from tkinter import ttk, PhotoImage
 from ARPtable import analyzeARPtable
@@ -12,6 +14,27 @@ from ProcessList import run_pslist_tool
 from StaticGUIConfigs import positionWindow
 from USBhistory import usb_history_analyzer_tool
 from VideoForensics import create_video_metadata_viewer
+
+# Determine the path to the directory containing the script
+base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+
+# Define the path to the images directory
+images_dir = os.path.join(base_path, 'images')
+
+# Modify the paths to the images
+image_files = {
+    "history": os.path.join(images_dir, "history.png"),
+    "cookies": os.path.join(images_dir, "cookies.png"),
+    "downloads": os.path.join(images_dir, "downloads.png"),
+    "image": os.path.join(images_dir, "image.png"),
+    "video": os.path.join(images_dir, "video.png"),
+    "audio": os.path.join(images_dir, "audio.png"),
+    "list": os.path.join(images_dir, "list.png"),
+    "dll": os.path.join(images_dir, "dll.png"),
+    "arp": os.path.join(images_dir, "arp.png"),
+    "malware": os.path.join(images_dir, "malware.png"),
+    "usb": os.path.join(images_dir, "usb.png")
+}
 
 # Main Window
 mainWindow = tkinter.Tk()
@@ -62,17 +85,17 @@ homeText.pack(side="top")
 
 # Define features for the Home Tab
 home_features = [
-    ("Get Browser History", "images/history.png", getChromeHistory),
-    ("Get Browser Cookies", "images/cookies.png", getChromeCookies),
-    ("Get Browser Downloads", "images/downloads.png", getChromeDownloads),
-    ("Image Forensics", "images/image.png", create_image_metadata_viewer),
-    ("Video Forensics", "images/video.png", create_video_metadata_viewer),
-    ("Audio Forensics", "images/audio.png", run_audio_metadata_viewer),
-    ("Get Process List", "images/list.png", run_pslist_tool),
-    ("List Loaded DLLs", "images/dll.png", run_list_loaded_dlls_tool),
-    ("Analyze ARP Table", "images/arp.png", analyzeARPtable),
-    ("Check Malware Persistence", "images/malware.png", malware_persistence_tool),
-    ("Get USB History", "images/usb.png", usb_history_analyzer_tool)
+    ("Get Browser History", "history", getChromeHistory),
+    ("Get Browser Cookies", "cookies", getChromeCookies),
+    ("Get Browser Downloads", "downloads", getChromeDownloads),
+    ("Image Forensics", "image", create_image_metadata_viewer),
+    ("Video Forensics", "video", create_video_metadata_viewer),
+    ("Audio Forensics", "audio", run_audio_metadata_viewer),
+    ("Get Process List", "list", run_pslist_tool),
+    ("List Loaded DLLs", "dll", run_list_loaded_dlls_tool),
+    ("Analyze ARP Table", "arp", analyzeARPtable),
+    ("Check Malware Persistence", "malware", malware_persistence_tool),
+    ("Get USB History", "usb", usb_history_analyzer_tool)
 ]
 
 # Create a canvas to hold the buttons and scrollbar
@@ -91,9 +114,9 @@ canvas.configure(yscrollcommand=scrollbar.set)
 # Display features on the Home Tab
 buttons = []
 button_images = []  # to keep references to PhotoImage objects
-for i, (feature, image_path, callback) in enumerate(home_features):
+for i, (feature, image_icon, callback) in enumerate(home_features):
     # Load image
-    image_icon = PhotoImage(file=image_path).subsample(5, 5)
+    image_icon = PhotoImage(file=image_files[image_icon]).subsample(5, 5)
     button_images.append(image_icon)
     # Create button
     button = tkinter.Button(
@@ -115,7 +138,6 @@ for i, (feature, image_path, callback) in enumerate(home_features):
 # Update scroll region when the frame size changes
 frame.update_idletasks()
 canvas.config(scrollregion=canvas.bbox("all"))
-
 
 # Function to update the canvas scrolling region
 def update_scroll_region(event):
@@ -142,7 +164,7 @@ def on_get_history_button_click():
     getChromeHistory(mainWindow)
 
 
-get_history_icon = PhotoImage(file="images/history.png")  # Add the path to your icon image
+get_history_icon = PhotoImage(file=image_files["history"])  # Add the path to your icon image
 get_history_icon = get_history_icon.subsample(5, 5)
 getHistoryButton = tkinter.Button(
     tabs[1],  # Browser Forensics Tab
@@ -163,7 +185,7 @@ def on_get_cookies_button_click():
     getChromeCookies(mainWindow)
 
 
-get_cookies_icon = PhotoImage(file="images/cookies.png")  # Add the path to your icon image
+get_cookies_icon = PhotoImage(file=image_files["cookies"])  # Add the path to your icon image
 get_cookies_icon = get_cookies_icon.subsample(5, 5)
 getCookiesButton = tkinter.Button(
     tabs[1],  # Browser Forensics Tab
@@ -184,7 +206,7 @@ def on_get_downloads_button_click():
     getChromeDownloads(mainWindow)
 
 
-get_downloads_icon = PhotoImage(file="images/downloads.png")  # Add the path to your icon image
+get_downloads_icon = PhotoImage(file=image_files["downloads"])  # Add the path to your icon image
 get_downloads_icon = get_downloads_icon.subsample(5, 5)
 getDownloadsButton = tkinter.Button(
     tabs[1],  # Browser Forensics Tab
@@ -207,7 +229,7 @@ def on_get_image_metadata_button_click():
     create_image_metadata_viewer(mainWindow)
 
 
-image_icon = PhotoImage(file="images/image.png")  # Add the path to your icon image
+image_icon = PhotoImage(file=image_files["image"])  # Add the path to your icon image
 image_icon = image_icon.subsample(5, 5)
 imageForensicsButton = tkinter.Button(
     tabs[2],  # Media Forensics Tab
@@ -228,7 +250,7 @@ def on_get_video_metadata_button_click():
     create_video_metadata_viewer(mainWindow)
 
 
-video_icon = PhotoImage(file="images/video.png")  # Add the path to your icon image
+video_icon = PhotoImage(file=image_files["video"])  # Add the path to your icon image
 video_icon = video_icon.subsample(5, 5)
 videoForensicsButton = tkinter.Button(
     tabs[2],  # Media Forensics Tab
@@ -249,7 +271,7 @@ def on_get_audio_metadata_button_click():
     run_audio_metadata_viewer(mainWindow)
 
 
-audio_icon = PhotoImage(file="images/audio.png")  # Add the path to your icon image
+audio_icon = PhotoImage(file=image_files["audio"])  # Add the path to your icon image
 audio_icon = audio_icon.subsample(5, 5)
 audioForensicsButton = tkinter.Button(
     tabs[2],  # Media Forensics Tab
@@ -272,7 +294,7 @@ def on_get_pslist_button_click():
     run_pslist_tool(mainWindow)
 
 
-get_pslist_icon = PhotoImage(file="images/list.png")  # Add the path to your icon image
+get_pslist_icon = PhotoImage(file=image_files["list"])  # Add the path to your icon image
 get_pslist_icon = get_pslist_icon.subsample(5, 5)
 getPSlistButton = tkinter.Button(
     tabs[3],  # Memory Forensics Tab
@@ -293,7 +315,7 @@ def on_get_loaded_dlls_button_click():
     run_list_loaded_dlls_tool(mainWindow)
 
 
-get_loaded_dlls_icon = PhotoImage(file="images/dll.png")  # Add the path to your icon image
+get_loaded_dlls_icon = PhotoImage(file=image_files["dll"])  # Add the path to your icon image
 get_loaded_dlls_icon = get_loaded_dlls_icon.subsample(5, 5)
 listLoadedDLLsButton = tkinter.Button(
     tabs[3],  # Memory Forensics Tab
@@ -314,7 +336,7 @@ def on_analyze_arp_table_button_click():
     analyzeARPtable(mainWindow)
 
 
-analyze_arp_table_icon = PhotoImage(file="images/arp.png")  # Add the path to your icon image
+analyze_arp_table_icon = PhotoImage(file=image_files["arp"])  # Add the path to your icon image
 analyze_arp_table_icon = analyze_arp_table_icon.subsample(5, 5)
 analyzeARPtableButton = tkinter.Button(
     tabs[3],  # Memory Forensics Tab
@@ -337,7 +359,7 @@ def on_get_malware_persistence_button_click():
     malware_persistence_tool(mainWindow)
 
 
-malware_persistence_icon = PhotoImage(file="images/malware.png")  # Add the path to your icon image
+malware_persistence_icon = PhotoImage(file=image_files["malware"])  # Add the path to your icon image
 malware_persistence_icon = malware_persistence_icon.subsample(5, 5)
 malwarePersistenceButton = tkinter.Button(
     tabs[4],  # Registry Forensics Tab
@@ -358,7 +380,7 @@ def on_get_usb_history_button_click():
     usb_history_analyzer_tool(mainWindow)
 
 
-usb_history_icon = PhotoImage(file="images/usb.png")  # Add the path to your icon image
+usb_history_icon = PhotoImage(file=image_files["usb"])  # Add the path to your icon image
 usb_history_icon = usb_history_icon.subsample(5, 5)
 usbHistoryButton = tkinter.Button(
     tabs[4],  # Registry Forensics Tab
